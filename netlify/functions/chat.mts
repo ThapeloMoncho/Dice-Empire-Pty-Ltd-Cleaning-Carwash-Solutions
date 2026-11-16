@@ -2,7 +2,7 @@ import {
   ChatApiError,
   generateWebsiteChatReply,
   type ChatTurnInput,
-} from '../../server/geminiChat';
+} from '../../server/geminiChat.ts';
 
 function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {

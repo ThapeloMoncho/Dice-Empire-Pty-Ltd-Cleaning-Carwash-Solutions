@@ -176,7 +176,7 @@ export async function generateWebsiteChatReply(
 
   const history = normalizeHistory(rawHistory);
 
-  const maxAttempts = 3;
+  const maxAttempts = 2;
   let lastError: unknown;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
@@ -228,7 +228,7 @@ export async function generateWebsiteChatReply(
         msg.includes('fetch');
 
       if (attempt < maxAttempts && isTransient) {
-        await new Promise((resolve) => setTimeout(resolve, 400 * Math.pow(2, attempt - 1)));
+        await new Promise((resolve) => setTimeout(resolve, 250));
         continue;
       }
 

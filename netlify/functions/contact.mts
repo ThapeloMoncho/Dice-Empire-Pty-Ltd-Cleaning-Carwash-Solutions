@@ -1,4 +1,4 @@
-import { handleQuoteSubmission } from '../../server/enquiries';
+import { handleContactSubmission } from '../../server/enquiries.ts';
 
 export default async (req: Request): Promise<Response> => {
   if (req.method === 'OPTIONS') {
@@ -23,7 +23,7 @@ export default async (req: Request): Promise<Response> => {
   }
 
   const originUrl = req.headers.get('origin') || undefined;
-  const result = await handleQuoteSubmission(body, originUrl);
+  const result = await handleContactSubmission(body, originUrl);
   return new Response(JSON.stringify(result.body), {
     status: result.status,
     headers: { 'Content-Type': 'application/json' },

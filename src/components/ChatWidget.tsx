@@ -77,10 +77,14 @@ export function ChatWidget({ onOpenWhatsApp }: ChatWidgetProps) {
     setInput('');
     setIsLoading(true);
 
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 9000);
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           message: trimmed,
           history: historyPayload,
@@ -109,30 +113,21 @@ export function ChatWidget({ onOpenWhatsApp }: ChatWidgetProps) {
         return;
       }
 
-      // If hosted statically without serverless functions (404/405/non-JSON) or without GEMINI_API_KEY configured yet (503/502),
-      // respond smoothly from website content instead of breaking the chat experience.
-      if (
-        !isJson ||
-        response.status === 404 ||
-        response.status === 405 ||
-        response.status === 502 ||
-        response.status === 503
-      ) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `m-${Date.now()}`,
-            role: 'model',
-            text: answerFromWebsiteContent(trimmed),
-          },
-        ]);
+      if (response.status === 400 && data?.error) {
+        setError(data.error);
         return;
       }
 
-      setError(
-        data?.error ||
-          'Could not get a response right now. Please try again or reach us on WhatsApp.',
-      );
+      // On any backend/Netlify error (404/405/500/502/503/504, missing env var, or static-only host),
+      // answer accurately from the website's own content instead of showing an error state.
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `m-${Date.now()}`,
+          role: 'model',
+          text: answerFromWebsiteContent(trimmed),
+        },
+      ]);
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -143,6 +138,7 @@ export function ChatWidget({ onOpenWhatsApp }: ChatWidgetProps) {
         },
       ]);
     } finally {
+      window.clearTimeout(timeoutId);
       setIsLoading(false);
     }
   }
