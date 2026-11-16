@@ -7,6 +7,7 @@ import {
   Send,
   X,
 } from 'lucide-react';
+import { answerFromWebsiteContent } from '../data/chatFallback';
 
 interface ChatMessage {
   id: string;
@@ -86,32 +87,61 @@ export function ChatWidget({ onOpenWhatsApp }: ChatWidgetProps) {
         }),
       });
 
-      const data = (await response.json().catch(() => null)) as {
-        ok?: boolean;
-        reply?: string;
-        error?: string;
-      } | null;
+      const contentType = response.headers.get('content-type') || '';
+      const isJson = contentType.includes('application/json');
+      const data = isJson
+        ? ((await response.json().catch(() => null)) as {
+            ok?: boolean;
+            reply?: string;
+            error?: string;
+          } | null)
+        : null;
 
-      if (!response.ok || !data?.ok || !data.reply) {
-        setError(
-          data?.error ||
-            'Could not get a response right now. Please try again or reach us on WhatsApp.',
-        );
+      if (response.ok && data?.ok && data.reply) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `m-${Date.now()}`,
+            role: 'model',
+            text: data.reply!,
+          },
+        ]);
         return;
       }
 
+      // If hosted statically without serverless functions (404/405/non-JSON) or without GEMINI_API_KEY configured yet (503/502),
+      // respond smoothly from website content instead of breaking the chat experience.
+      if (
+        !isJson ||
+        response.status === 404 ||
+        response.status === 405 ||
+        response.status === 502 ||
+        response.status === 503
+      ) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `m-${Date.now()}`,
+            role: 'model',
+            text: answerFromWebsiteContent(trimmed),
+          },
+        ]);
+        return;
+      }
+
+      setError(
+        data?.error ||
+          'Could not get a response right now. Please try again or reach us on WhatsApp.',
+      );
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
           id: `m-${Date.now()}`,
           role: 'model',
-          text: data.reply!,
+          text: answerFromWebsiteContent(trimmed),
         },
       ]);
-    } catch {
-      setError(
-        'Connection issue while contacting the assistant. Please try again or message us on WhatsApp.',
-      );
     } finally {
       setIsLoading(false);
     }

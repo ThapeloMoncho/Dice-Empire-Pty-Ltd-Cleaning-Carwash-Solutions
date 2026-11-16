@@ -42,3 +42,10 @@ npm run dev      # Starts Express + Vite dev server on port 3000
 npm run build    # Builds production frontend into dist/
 npm start        # Runs production server (node server.ts) on port 3000
 ```
+
+## Netlify Hosting (`netlify.toml` & `netlify/functions/`)
+This project includes `netlify.toml` and serverless Netlify Functions for `/api/chat`, `/api/quote`, `/api/contact`, and `/api/health`.
+
+1. Deploy the full repository to Netlify via Git or `netlify deploy --build` (rather than uploading only the static `dist/` folder), so `netlify/functions/` are deployed alongside `dist/`.
+2. In **Netlify → Site configuration → Environment variables**, add `GEMINI_API_KEY` (and optional `RESEND_API_KEY` or `SMTP_*` variables) so the AI chatbot and email routes run server-side.
+
