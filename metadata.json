@@ -1,0 +1,8 @@
+{
+  "name": "Dice Empire (Pty) Ltd — Cleaning & Carwash Solutions",
+  "description": "Youth-owned residential, commercial, school, and vehicle cleaning & carwash services in Pampierstad, Phokwane Municipality, and Kimberley, South Africa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
