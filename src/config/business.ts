@@ -179,8 +179,8 @@ export const CLEANING_SERVICES: CleaningServiceCategory[] = [
       'Dust and dirt removal',
       'Mattress refreshing',
     ],
-    image: MEDIA_ASSETS.carpetMattress,
-    imageAlt: 'Clean sunlit bedroom with freshly steamed mattress and crisp linens',
+    image: '/assets/aistudio/How-to-Clean-a-Mattress-image_7ff353db.jpg',
+    imageAlt: 'Cleaning specialist vacuuming and treating a mattress in a bright bedroom',
     whatsappMessage:
       'Hello Dice Empire, I would like to enquire about Mattress Cleaning services. Please provide more information and a quotation.',
   },
