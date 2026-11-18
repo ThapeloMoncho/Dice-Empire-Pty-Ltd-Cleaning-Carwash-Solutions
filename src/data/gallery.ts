@@ -1,3 +1,5 @@
+import { publicAsset } from './media';
+
 export type GalleryArea = 'Carpets' | 'Kitchen' | 'Floors' | 'Rooms' | 'Windows';
 export type GalleryStage = 'After' | 'Before & In Progress';
 
@@ -24,32 +26,32 @@ export const BEFORE_AFTER_HIGHLIGHTS: BeforeAfterPair[] = [
     id: 'ba-carpets',
     title: 'Carpet Deep Wash & Extraction',
     area: 'Carpets',
-    beforeSrc: '/assets/aistudio/before-carpets-63_48cd2597.jpg',
-    afterSrc: '/assets/aistudio/after-carpets-21_58e859cf.jpg',
+    beforeSrc: publicAsset('assets/aistudio/before-carpets-63_48cd2597.jpg'),
+    afterSrc: publicAsset('assets/aistudio/after-carpets-21_58e859cf.jpg'),
     summary: 'Heavy water-ring staining scrubbed with rotary foam extraction and rinsed clean.',
   },
   {
     id: 'ba-kitchen',
     title: 'Commercial Kitchen Deep Clean',
     area: 'Kitchen',
-    beforeSrc: '/assets/aistudio/before-kitchen-24_1e5e2672.jpg',
-    afterSrc: '/assets/aistudio/after-kitchen-02_62874856.jpg',
+    beforeSrc: publicAsset('assets/aistudio/before-kitchen-24_1e5e2672.jpg'),
+    afterSrc: publicAsset('assets/aistudio/after-kitchen-02_62874856.jpg'),
     summary: 'Floors, stainless prep tables, walls and food storage areas degreased and sanitised.',
   },
   {
     id: 'ba-floors',
     title: 'School & Facility Floor Restoration',
     area: 'Floors',
-    beforeSrc: '/assets/aistudio/before-floors-12_9614300d.jpg',
-    afterSrc: '/assets/aistudio/after-floors-08_50a0faf4.jpg',
+    beforeSrc: publicAsset('assets/aistudio/before-floors-12_9614300d.jpg'),
+    afterSrc: publicAsset('assets/aistudio/after-floors-08_50a0faf4.jpg'),
     summary: 'Scuffed vinyl floors stripped, scrubbed by machine and finished to a clean sheen.',
   },
   {
     id: 'ba-rooms',
     title: 'Classroom & Washroom Refresh',
     area: 'Rooms',
-    beforeSrc: '/assets/aistudio/before-rooms-31_21b1850a.jpg',
-    afterSrc: '/assets/aistudio/after-rooms-14_87a6f510.jpg',
+    beforeSrc: publicAsset('assets/aistudio/before-rooms-31_21b1850a.jpg'),
+    afterSrc: publicAsset('assets/aistudio/after-rooms-14_87a6f510.jpg'),
     summary: 'Cluttered, dusty rooms vacuumed, wiped down and restored for safe daily use.',
   },
 ];
@@ -63,7 +65,7 @@ function makePhotos(
 ): ProjectGalleryPhoto[] {
   return files.map((file, idx) => ({
     id: `${area.toLowerCase()}-${stage === 'After' ? 'after' : 'before'}-${idx + 1}`,
-    src: `/assets/aistudio/${file}`,
+    src: publicAsset(`assets/aistudio/${file}`),
     area,
     stage,
     title: `${titlePrefix} #${idx + 1}`,

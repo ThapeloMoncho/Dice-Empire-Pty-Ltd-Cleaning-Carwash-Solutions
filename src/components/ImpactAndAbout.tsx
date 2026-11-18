@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, Award, ChevronDown, ChevronUp } from 'lucide-react';
+import { publicAsset } from '../data/media';
 
 export function ImpactAndAbout() {
   const [showMoreAbout, setShowMoreAbout] = useState(false);
@@ -11,7 +12,7 @@ export function ImpactAndAbout() {
             <div className="lg:col-span-6 order-2 lg:order-1">
               <div className="aspect-[3/4] max-w-md mx-auto rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-xs">
                 <img
-                  src="/assets/about-cleaning.webp"
+                  src={publicAsset('assets/about-cleaning.webp')}
                   alt="Dice Empire cleaning specialist vacuuming tiled floors"
                   className="w-full h-full object-cover object-center"
                 />

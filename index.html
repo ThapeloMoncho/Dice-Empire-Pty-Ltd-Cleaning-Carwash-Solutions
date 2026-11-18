@@ -60,6 +60,7 @@
     <script>
       (function () {
         var origin = window.location.origin;
+        var basePath = '%BASE_URL%';
         var pageUrl = origin + window.location.pathname;
         var canonical = document.querySelector('link[rel="canonical"]');
         if (canonical) {
@@ -76,7 +77,7 @@
         ].forEach(function (selector) {
           var tag = document.querySelector(selector);
           if (tag) {
-            tag.setAttribute('content', origin + '/og-image.jpg');
+            tag.setAttribute('content', origin + basePath + 'og-image.jpg');
           }
         });
       })();

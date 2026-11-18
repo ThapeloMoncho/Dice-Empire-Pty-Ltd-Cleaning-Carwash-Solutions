@@ -1,4 +1,4 @@
-import { MEDIA_ASSETS } from '../data/media';
+import { MEDIA_ASSETS, publicAsset } from '../data/media';
 
 export interface WhatsAppNumber {
   id: 'primary' | 'secondary';
@@ -179,7 +179,7 @@ export const CLEANING_SERVICES: CleaningServiceCategory[] = [
       'Dust and dirt removal',
       'Mattress refreshing',
     ],
-    image: '/assets/aistudio/How-to-Clean-a-Mattress-image_7ff353db.jpg',
+    image: publicAsset('assets/aistudio/How-to-Clean-a-Mattress-image_7ff353db.jpg'),
     imageAlt: 'Cleaning specialist vacuuming and treating a mattress in a bright bedroom',
     whatsappMessage:
       'Hello Dice Empire, I would like to enquire about Mattress Cleaning services. Please provide more information and a quotation.',
@@ -216,7 +216,7 @@ export const CLEANING_SERVICES: CleaningServiceCategory[] = [
       'School facility cleaning',
       'General school premises cleaning',
     ],
-    image: '/assets/aistudio/pexels-rdne-8500417_f9d2f989.jpg',
+    image: publicAsset('assets/aistudio/pexels-rdne-8500417_f9d2f989.jpg'),
     imageAlt: 'Clean sunlit classroom with student desks, chalkboard and polished floor',
     whatsappMessage:
       'Hello Dice Empire, I would like to enquire about School Cleaning services. Please provide more information and a quotation.',

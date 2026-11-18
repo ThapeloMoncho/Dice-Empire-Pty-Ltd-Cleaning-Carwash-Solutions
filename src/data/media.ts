@@ -5,15 +5,19 @@ import officeSchoolImg from '../assets/images/service_office_school_179455415164
 import carwashBakkieTaxiImg from '../assets/images/carwash_bakkie_taxi_1794554151292.jpg';
 import carwashInteriorImg from '../assets/images/carwash_interior_detail_1794554152452.jpg';
 
+export function publicAsset(path: string) {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+}
+
 export const MEDIA_ASSETS = {
   hero: heroImg,
-  heroVideo: '/assets/dice-home-video.mp4',
-  heroPoster: '/assets/dice-home-poster.jpg',
+  heroVideo: publicAsset('assets/dice-home-video.mp4'),
+  heroPoster: publicAsset('assets/dice-home-poster.jpg'),
   residentialCouch: residentialCouchImg,
   carpetMattress: carpetMattressImg,
   officeSchool: officeSchoolImg,
   carwashBakkieTaxi: carwashBakkieTaxiImg,
   carwashInterior: carwashInteriorImg,
-  logoBlue: '/assets/aistudio/4_030e035f.png',
-  logoWhite: '/assets/aistudio/Primary_Logo_1cf39809.png',
+  logoBlue: publicAsset('assets/aistudio/4_030e035f.png'),
+  logoWhite: publicAsset('assets/aistudio/Primary_Logo_1cf39809.png'),
 } as const;
